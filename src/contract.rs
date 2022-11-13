@@ -7,7 +7,7 @@ use cosmwasm_std::{
 
 use crate::error::ContractError;
 use crate::msg::{ExecuteMsg, InstantiateMsg, QueryMsg, DepositResponse};
-use crate::state::{Deposits, DEPOSITS};
+use crate::state::{Deposits, DEPOSITS, CONFIG, Config}; //added CONFIG, Config to solve the compiler error
 
 /*
 const CONTRACT_NAME: &str = "crates.io:deposit-native-example";
@@ -97,7 +97,7 @@ pub mod query {
     }
 
     //TODO: move the query deposits code to this function.
-    fn query_deposits(deps: Deps, address:String) -> StdResult<DepositResponse> {
+    pub fn query_deposits(deps: Deps, address:String) -> StdResult<DepositResponse> {
         unimplemented!()
     }
 }
@@ -163,8 +163,8 @@ pub fn execute_withdraw(
         .add_message(msg)
     )
 }
-
-fn query_deposits(deps: Deps, address:String) -> StdResult<DepositResponse> {
+// I added _ here because we don't use this fn
+fn _query_deposits(deps: Deps, address:String) -> StdResult<DepositResponse> {
     let res: StdResult<Vec<_>> = DEPOSITS.prefix(&address).range(deps.storage, None, None, Order::Ascending).collect();
     let deposits = res?;
     Ok(DepositResponse { deposits })
@@ -196,8 +196,8 @@ mod tests {
         assert_eq!(DENOM.to_string(), res.attributes[1].value);
         assert_eq!(AMOUNT.to_string(), res.attributes[2].value);
     }
-
-    fn withdraw_coins(deps: DepsMut) {
+    // I added _ here because we don't use this fn
+    fn _withdraw_coins(_deps: DepsMut) {
 
     }
 
