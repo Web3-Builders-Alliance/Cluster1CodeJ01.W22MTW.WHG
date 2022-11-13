@@ -110,7 +110,10 @@ pub fn execute_deposit(
     let d_coins = info.funds[0].clone();
     
     //TODO: Make sure sender is the owner in config
-
+    let  config = CONFIG.load(deps.storage)?;
+    if config.owner != info.sender {
+        return Err(ContractError::InvalidOwner {});
+    }
     //TODO: make sure funds array is a length of 1
 
     //check to see if deposit exists
