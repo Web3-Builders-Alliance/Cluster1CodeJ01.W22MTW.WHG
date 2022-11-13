@@ -97,7 +97,7 @@ pub mod query {
     }
 
     //TODO: move the query deposits code to this function.
-    pub fn query_deposits(deps: Deps, address:String) -> StdResult<DepositResponse> {
+    pub fn query_deposits(_deps: Deps, _address:String) -> StdResult<DepositResponse> {
         unimplemented!()
     }
 }
