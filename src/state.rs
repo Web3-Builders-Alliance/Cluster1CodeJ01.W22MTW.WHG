@@ -17,6 +17,13 @@ pub struct Deposits {
     pub coins: Coin
 }
 
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct Withdraws {
+    pub count: i32,
+    pub owner: Addr,
+    pub coins: Coin
+}
+
 //key is address, denom
 pub const DEPOSITS: Map<(&str, &str), Deposits> = Map::new("deposits");
 
